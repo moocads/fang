@@ -12,10 +12,13 @@ export function SpaceSection() {
   const t = dict.home.space
 
   return (
-    <PatternSection className="px-6 py-28 md:px-12 md:py-36">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-20">
+    <PatternSection className="px-6 py-14 md:px-12 md:py-14">
+      {/* <div className="absolute left-20 ">
+        <Image src="/assets/illustration-herb.png" alt="Space" width={200} height={200} />
+        </div> */}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-20">
         <Reveal>
-          <p className="text-xs font-semibold tracking-[0.24em] text-cinnabar-600 uppercase">
+          <p className="text-[clamp(16px,2vw,20px)] font-semibold tracking-[0.24em] text-cinnabar-600 uppercase">
             {t.eyebrow}
           </p>
           <h2 className={cn("mt-4 font-display text-[clamp(30px,4vw,46px)] leading-[1.05] font-semibold tracking-tight text-ink-900", locale === 'zh' ? 'font-han' : 'font-display')}>
@@ -36,8 +39,8 @@ export function SpaceSection() {
             alt="FĀNG clinic interior"
             width={286}
             height={232}
-            sizes="(max-width: 768px) 50vw"
-            className="h-auto w-3/4 max-w-full rounded-[14px] md:ml-auto"
+            sizes="(max-width: 768px) 100px"
+            className="h-auto w-3/4 max-w-full md:ml-auto"
           />
         </Reveal>
       </div>
