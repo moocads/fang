@@ -10,10 +10,12 @@ export function LanguageSwitcher({
   locale,
   dark = false,
   labels,
+  className,
 }: {
   locale: Locale
   dark?: boolean
   labels: { en: string; zh: string }
+  className?: string
 }) {
   const pathname = usePathname()
   const otherLocale: Locale = locale === 'en' ? 'zh' : 'en'
@@ -27,6 +29,7 @@ export function LanguageSwitcher({
         dark
           ? 'border-paper-100/30 text-paper-100 hover:border-paper-100/60 hover:bg-paper-100/10'
           : 'border-ink-300 text-ink-700 hover:border-cinnabar-300 hover:text-cinnabar-600',
+        className,
       )}
       aria-label={locale === 'en' ? 'Switch to Chinese' : 'Switch to English'}
     >

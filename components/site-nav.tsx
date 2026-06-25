@@ -101,16 +101,16 @@ export function SiteNav({ onDark = false }: { onDark?: boolean }) {
     <>
       <nav
         className={cn(
-          'fixed inset-x-0 top-0 z-50 flex items-center justify-between transition-all duration-300',
+          'fixed inset-x-0 top-0 z-50 flex items-center justify-center transition-all duration-300 md:justify-between',
           solid || menuOpen
-            ? 'bg-paper-100/85 px-6 py-3.5 shadow-[0_1px_0_var(--color-ink-200)] backdrop-blur-md md:px-12'
-            : 'px-6 py-5 md:px-12',
+            ? 'bg-paper-100/85 px-4 py-3.5 shadow-[0_1px_0_var(--color-ink-200)] backdrop-blur-md md:px-12'
+            : 'px-4 py-5 md:px-12',
         )}
       >
         <Link
           href={localizedPath('/', locale)}
           aria-label={dict.nav.homeAria}
-          className="flex items-center"
+          className="flex items-center md:static"
         >
           <Image
             src="/assets/logo-mark-black.png"
@@ -165,7 +165,7 @@ export function SiteNav({ onDark = false }: { onDark?: boolean }) {
         <button
           type="button"
           className={cn(
-            'inline-flex size-11 items-center justify-center md:hidden',
+            'absolute left-3 inline-flex size-11 items-center justify-center md:hidden',
             menuOpen || !dark ? 'text-ink-800' : 'text-paper-100',
           )}
           aria-expanded={menuOpen}
@@ -175,6 +175,21 @@ export function SiteNav({ onDark = false }: { onDark?: boolean }) {
         >
           <MenuIcon open={menuOpen} />
         </button>
+
+        <div className="absolute right-3 flex items-center gap-2 md:hidden">
+          <Link
+            href={localizedPath('/consultation', locale)}
+            className={cn(chamferBtn, chamferBtnPrimary, 'px-3 py-2 text-xs')}
+          >
+            {dict.nav.book}
+          </Link>
+          <LanguageSwitcher
+            locale={locale}
+            dark={dark}
+            labels={{ en: dict.nav.langEn, zh: dict.nav.langZh }}
+            className="px-2.5 py-2 text-[11px]"
+          />
+        </div>
       </nav>
 
       <AnimatePresence>
