@@ -1,0 +1,179 @@
+@import 'tailwindcss';
+
+/* FANG 方时 — Design tokens mapped to Tailwind v4 theme.
+   Rooted in classical Chinese pigments: 朱砂 cinnabar, 墨 ink,
+   宣纸 rice paper, 青绿 mineral blue-green, 赭石 ochre. */
+
+@theme {
+  /* ---- Fonts (variables provided by next/font/local in layout.tsx) ---- */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-proza), Georgia, serif;
+  --font-en-heading: var(--font-proza-regular), Georgia, serif;
+  --font-zh-heading: var(--font-zh-heading-serif), 'Songti SC', 'Noto Serif SC', serif;
+  --font-zh-ui: var(--font-zh-ui-serif), 'PingFang SC', 'Noto Sans SC', sans-serif;
+  --font-han: var(--font-zh-heading);
+  --font-body: var(--font-proza), Georgia, serif;
+
+  /* ---- Cinnabar / 朱砂 ---- */
+  --color-cinnabar-700: #8f2e1e;
+  --color-cinnabar-600: #a8371f;
+  --color-cinnabar-500: #bc4a2f;
+  --color-cinnabar-400: #cb6347;
+  --color-cinnabar-300: #dd8a72;
+  --color-cinnabar-100: #f0d5c9;
+
+  /* ---- Ink / 墨 ---- */
+  --color-ink-900: #211f1b;
+  --color-ink-800: #2e2b27;
+  --color-ink-700: #423d36;
+  --color-ink-500: #6b6357;
+  --color-ink-400: #8c8478;
+  --color-ink-300: #b3ab9d;
+  --color-ink-200: #d6cfc1;
+
+  /* ---- Rice paper / 宣纸 ---- */
+  --color-paper-000: #fcf8ef;
+  --color-paper-100: #f5eee1;
+  --color-paper-200: #ede3d2;
+  --color-paper-300: #e2d6c0;
+
+  /* ---- Jade / 青绿 ---- */
+  --color-jade-700: #3d5346;
+  --color-jade-500: #5e7c6b;
+  --color-jade-300: #9cb3a4;
+  --color-jade-100: #dce6de;
+
+  /* ---- Mineral blue / 石青 ---- */
+  --color-mineral-600: #355663;
+  --color-mineral-400: #5b7c88;
+
+  /* ---- Ochre / 赭石 ---- */
+  --color-ochre-600: #9a6a33;
+  --color-ochre-500: #b98a4b;
+  --color-ochre-300: #d8b989;
+
+  /* ---- Semantic surfaces / text ---- */
+  --color-background: #f5eee1;
+  --color-foreground: #2e2b27;
+
+  /* ---- Radii ---- */
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 22px;
+
+  /* ---- Shadows ---- */
+  --shadow-md: 0 6px 18px rgba(33, 31, 27, 0.09);
+  --shadow-lg: 0 16px 40px rgba(33, 31, 27, 0.12);
+
+  /* ---- Easing ---- */
+  --ease-fang-standard: cubic-bezier(0.32, 0.08, 0.24, 1);
+  --ease-fang-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: var(--color-paper-100);
+    color: var(--color-ink-800);
+    overflow-x: hidden;
+  }
+  html[lang='en'] :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-en-heading);
+    font-weight: 400;
+  }
+  html[lang='en'] :is(p, a) {
+    font-family: var(--font-body);
+  }
+  html[lang='zh'] :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-zh-heading);
+  }
+  html[lang='zh'] :is(p, button, a) {
+    font-family: var(--font-zh-ui);
+  }
+}
+
+@layer utilities {
+  .pattern-bg {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .pattern-bg > :not([aria-hidden='true']) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Cut-corner button (octagonal chamfer) with inset border */
+  .btn-chamfer {
+    --chamfer: 10px;
+    --btn-border-w: 1.5px;
+    clip-path: polygon(
+      var(--chamfer) 0,
+      calc(100% - var(--chamfer)) 0,
+      100% var(--chamfer),
+      100% calc(100% - var(--chamfer)),
+      calc(100% - var(--chamfer)) 100%,
+      var(--chamfer) 100%,
+      0 calc(100% - var(--chamfer)),
+      0 var(--chamfer)
+    );
+    box-shadow: inset 0 0 0 var(--btn-border-w) var(--btn-border-color, currentColor);
+  }
+
+  .btn-chamfer-primary {
+    --btn-border-color: var(--color-cinnabar-500);
+    background-color: var(--color-cinnabar-500);
+  }
+
+  .btn-chamfer-primary:hover {
+    --btn-border-color: var(--color-cinnabar-600);
+    background-color: var(--color-cinnabar-600);
+  }
+
+  .btn-chamfer-light {
+    --btn-border-color: var(--color-paper-000);
+    background-color: var(--color-paper-000);
+  }
+
+  .btn-chamfer-light:hover {
+    --btn-border-color: #fff;
+    background-color: #fff;
+  }
+
+  /* Bracket border — horizontal / vertical segments, open corners */
+  .btn-bracket {
+    --btn-border-color: var(--color-ink-500);
+    --btn-bracket-gap: 14px;
+    --btn-border-w: 1px;
+    position: relative;
+    background-color: transparent;
+  }
+
+  .btn-bracket::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--btn-border-color), var(--btn-border-color)) top /
+        calc(100% - 2 * var(--btn-bracket-gap)) var(--btn-border-w) no-repeat,
+      linear-gradient(var(--btn-border-color), var(--btn-border-color)) bottom /
+        calc(100% - 2 * var(--btn-bracket-gap)) var(--btn-border-w) no-repeat,
+      linear-gradient(var(--btn-border-color), var(--btn-border-color)) left /
+        var(--btn-border-w) calc(100% - 2 * var(--btn-bracket-gap)) no-repeat,
+      linear-gradient(var(--btn-border-color), var(--btn-border-color)) right /
+        var(--btn-border-w) calc(100% - 2 * var(--btn-bracket-gap)) no-repeat;
+  }
+
+  .btn-bracket-ghost {
+    --btn-border-color: var(--color-ink-500);
+  }
+
+  .btn-bracket-ghost:hover {
+    --btn-border-color: var(--color-ink-700);
+    background-color: var(--color-cinnabar-100);
+  }
+}
